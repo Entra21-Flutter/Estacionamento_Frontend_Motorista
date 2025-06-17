@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vagaja/views/CadastroMotorista.dart';
 
 void main() {
-  runApp(Scaffold());
+  runApp(MaterialApp(home: CadastroMotorista()));
 }
