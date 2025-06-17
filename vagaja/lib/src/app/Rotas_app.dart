@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/Controllers/LoginController.dart';
-import 'package:vagaja/views/CadastroMotorista.dart';
+import 'package:vagaja/src/views/CadastroMotorista.dart';
 
 class Routes extends StatelessWidget {
   // const Routes({super.key});
@@ -9,6 +9,7 @@ class Routes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "",
       initialRoute: loginController.getLoginValid() ? '/home' : '/login',
       routes: {
         '/cadastro' : (context) => const CadastroMotorista(),
