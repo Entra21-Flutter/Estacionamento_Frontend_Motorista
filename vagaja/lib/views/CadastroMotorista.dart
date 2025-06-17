@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vagaja/views/layouts/BarraLogo.dart';
 import 'package:vagaja/views/layouts/BarraNavegacao.dart';
+
 
 // Tela de cadastro de motorista, usando um StatefulWidget para gerenciar o estado dos campos do formulário.
 class CadastroMotorista extends StatefulWidget {
@@ -24,7 +26,7 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
     return Scaffold(
       backgroundColor: Colors.blue[200], // Cor de fundo da tela.
       // Barra superior da tela com o título.
-      appBar: AppBar(title: const Text('Cadastro de Pessoa')),
+      appBar: Barralogo(),
       body: Padding(
         padding: const EdgeInsets.all(10.0), // Espaçamento interno da tela.
         child: Center(
