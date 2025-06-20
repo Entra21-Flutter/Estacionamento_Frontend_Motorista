@@ -11,10 +11,10 @@ class Routes extends StatelessWidget {
     return MaterialApp(
       initialRoute: loginController.getLoginValid() ? '/home' : '/login',
       routes: {
-        '/cadastro' : (context) => const CadastroMotorista(),
+        '/cadastro': (context) => const CadastroMotorista(),
+
         // '/login' : (context) => const LoginMotorista(),
         // '/home' : (context) => const PaginaPrincipal(),
-
       },
     );
   }

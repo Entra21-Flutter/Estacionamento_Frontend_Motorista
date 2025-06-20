@@ -6,12 +6,14 @@ class Barralogo extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.blue[800],
-      centerTitle: true,
-      title: Image.asset(
-        'assets/images/LogoVagaJa.jpg', // Caminho relativo ao pubspec.yaml
-        height: 40, // Ajuste a altura conforme necessário
-        
+      backgroundColor: Colors.blue[200],
+      title: ClipOval(
+        child: Image.asset(
+          'assets/images/LogoVagaJa.jpg',
+          height: 50,
+          width: 50,
+          fit: BoxFit.cover,
+        ),
       ),
       elevation: 0,
     );
