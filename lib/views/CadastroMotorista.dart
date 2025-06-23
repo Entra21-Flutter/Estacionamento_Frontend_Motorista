@@ -17,8 +17,8 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
   // Controladores para capturar o texto digitado nos campos do formulário.
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _senhaController = TextEditingController();
   final TextEditingController _cpfController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
   final TextEditingController _confirmarSenhaController =
       TextEditingController();
   @override
@@ -85,7 +85,18 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        //ValidarLoginController(); Buscar e validar dados
+                        ValidarLoginController validarLoginController =
+                            ValidarLoginController(
+                              _nomeController,
+                              _emailController,
+                              _cpfController,
+                              _senhaController,
+                              _confirmarSenhaController,
+                            );
+                        String mensagem = validarLoginController.validarLogin();
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(mensagem)));
                       },
                       child: const Text(
                         'Cadastrar',
@@ -107,7 +118,7 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                         },
                         child: const Text('Esqueceu a senha?'),
                       ),
-                      const SizedBox(height: 0),
+
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/login');
