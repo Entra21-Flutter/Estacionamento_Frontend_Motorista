@@ -3,24 +3,18 @@ import 'package:vagaja/controllers/LoginController.dart';
 import 'package:vagaja/views/layouts/BarraLogo.dart';
 import 'package:vagaja/views/layouts/Input.dart';
 
-// Tela de cadastro de motorista, usando um StatefulWidget para gerenciar o estado dos campos do formulário.
-class CadastroMotorista extends StatefulWidget {
-  const CadastroMotorista({super.key});
+class LoginMotorista extends StatefulWidget {
+  const LoginMotorista({super.key});
+
   @override
-  State<CadastroMotorista> createState() => _CadastroMotoristaState();
+  State<LoginMotorista> createState() => _LoginMotoristaState();
 }
 
-class _CadastroMotoristaState extends State<CadastroMotorista> {
-  // Chave global para identificar o formulário e validar seus campos.
+class _LoginMotoristaState extends State<LoginMotorista> {
   final _formKey = GlobalKey<FormState>();
-
-  // Controladores para capturar o texto digitado nos campos do formulário.
-  final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _cpfController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
-  final TextEditingController _confirmarSenhaController =
-      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +36,7 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
                     child: Text(
-                      'Cadastro Motorista',
+                      'Login',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -60,16 +54,8 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                     ),
                   ),
                   // Inputs
-                  Input('Nome Completo', Icons.person, false, _nomeController),
-                  Input('CPF', Icons.credit_card, false, _cpfController),
                   Input('E-mail', Icons.email, false, _emailController),
                   Input('Senha', Icons.lock, true, _senhaController),
-                  Input(
-                    'Confirmar Senha',
-                    Icons.lock_outline,
-                    true,
-                    _confirmarSenhaController,
-                  ),
 
                   // Botão de cadastro
                   const SizedBox(height: 18),
@@ -85,16 +71,12 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        ValidarCadastroController validarCadastroController =
-                            ValidarCadastroController(
-                              _nomeController,
+                        ValidarLoginController validarLoginController =
+                            ValidarLoginController(
                               _emailController,
-                              _cpfController,
                               _senhaController,
-                              _confirmarSenhaController,
                             );
-                        String mensagem = validarCadastroController
-                            .validarCadastro();
+                        String mensagem = validarLoginController.validarLogin();
                         ScaffoldMessenger.of(
                           context,
                         ).showSnackBar(SnackBar(content: Text(mensagem)));
@@ -122,9 +104,11 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
 
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/login');
+                          Navigator.pushReplacementNamed(context, '/cadastro');
                         },
-                        child: const Text('Já tem uma conta? Faça login'),
+                        child: const Text(
+                          'Não possui uma conta? Cadastre uma agora!',
+                        ),
                       ),
                     ],
                   ),

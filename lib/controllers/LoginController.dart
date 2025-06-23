@@ -12,14 +12,14 @@ class LoginController {
   getLoginValid() => isLoginValid;
 }
 
-class ValidarLoginController {
+class ValidarCadastroController {
   final TextEditingController _nomeController;
   final TextEditingController _emailController;
   final TextEditingController _cpfController;
   final TextEditingController _senhaController;
   final TextEditingController _confirmarSenhaController;
 
-  ValidarLoginController(
+  ValidarCadastroController(
     this._nomeController,
     this._emailController,
     this._cpfController,
@@ -29,7 +29,7 @@ class ValidarLoginController {
 
   LoginController loginController = LoginController();
 
-  String validarLogin() {
+  String validarCadastro() {
     if (!validarNomeCompleto()) {
       return 'Nome completo inválido';
     }
@@ -99,5 +99,39 @@ class ValidarLoginController {
 
   bool validarConfirmarSenha() {
     return _confirmarSenhaController.text == _senhaController.text;
+  }
+}
+
+class ValidarLoginController {
+  final TextEditingController _emailController;
+  final TextEditingController _senhaController;
+
+  ValidarLoginController(this._emailController, this._senhaController);
+
+  LoginController loginController = LoginController();
+
+  String validarLogin() {
+    if (!validarEmail()) {
+      return 'E-mail inválido';
+    }
+    if (!validarSenha()) {
+      return 'Senha inválida';
+    }
+    loginController.setLoginValid(true);
+    return 'Login realizado com sucesso';
+  }
+
+  bool validarEmail() {
+    String email = _emailController.text.trim();
+    // Regex simples para e-mail válido
+    final regex = RegExp(r"^[\w\.\-]+@([\w\-]+\.)+[a-zA-Z]{2,4}$");
+    return regex.hasMatch(email);
+  }
+
+  bool validarSenha() {
+    String senha = _senhaController.text;
+    // Mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número, 1 caractere especial
+    final regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$');
+    return regex.hasMatch(senha);
   }
 }
