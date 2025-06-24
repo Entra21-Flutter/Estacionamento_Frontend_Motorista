@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/controllers/LoginController.dart';
+import 'package:vagaja/Controllers/LoginController.dart';
+import 'package:vagaja/Controllers/CadastroController.dart';
 import 'package:vagaja/views/layouts/BarraLogo.dart';
 import 'package:vagaja/views/layouts/Input.dart';
 
@@ -85,8 +86,8 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        ValidarCadastroController validarCadastroController =
-                            ValidarCadastroController(
+                        CadastroController validarCadastroController =
+                            CadastroController(
                               _nomeController,
                               _emailController,
                               _cpfController,
@@ -110,16 +111,6 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            '/recuperar-senha',
-                          );
-                        },
-                        child: const Text('Esqueceu a senha?'),
-                      ),
-
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/login');

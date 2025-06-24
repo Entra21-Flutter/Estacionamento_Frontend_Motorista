@@ -7,15 +7,20 @@ class Barralogo extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.blue[200],
-      title: ClipOval(
-        child: Image.asset(
-          'assets/images/LogoVagaJa.jpg',
-          height: 50,
-          width: 50,
-          fit: BoxFit.cover,
-        ),
+      title: Row(
+        children: [
+          ClipOval(
+            child: Image.asset(
+              'assets/images/LogoVagaJa.jpg',
+              height: 50,
+              width: 50,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 20),
+          Text('VagaJá', style: TextStyle(color: Colors.black87, fontSize: 20)),
+        ],
       ),
-      elevation: 0,
     );
   }
 

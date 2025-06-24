@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:vagaja/controllers/LoginController.dart';
+import 'package:vagaja/controllers/ValidacaoController.dart';
+
+class CadastroController {
+  final TextEditingController _nomeController;
+  final TextEditingController _emailController;
+  final TextEditingController _cpfController;
+  final TextEditingController _senhaController;
+  final TextEditingController _confirmarSenhaController;
+
+  CadastroController(
+    this._nomeController,
+    this._emailController,
+    this._cpfController,
+    this._senhaController,
+    this._confirmarSenhaController,
+  );
+
+  LoginController loginController = LoginController();
+
+  ValidacaoController validacaoController = ValidacaoController();
+  String validarCadastro() {
+    if (!validacaoController.validarNomeCompleto(_nomeController)) {
+      return 'Nome completo inválido';
+    }
+    if (!validacaoController.validarCpf(_cpfController)) {
+      return 'CPF inválido';
+    }
+    if (!validacaoController.validarEmail(_emailController)) {
+      return 'E-mail inválido';
+    }
+    if (!validacaoController.validarSenha(_senhaController)) {
+      return 'Senha inválida (mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 caractere especial)';
+    }
+    if (!validacaoController.validarConfirmarSenha(
+      _confirmarSenhaController,
+      _senhaController,
+    )) {
+      return 'As senhas não coincidem';
+    }
+    loginController.setLoginValid(true);
+    return 'Cadastro realizado com sucesso';
+  }
+}

@@ -82,7 +82,7 @@ class _LoginMotoristaState extends State<LoginMotorista> {
                         ).showSnackBar(SnackBar(content: Text(mensagem)));
                       },
                       child: const Text(
-                        'Cadastrar',
+                        'Entrar',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
