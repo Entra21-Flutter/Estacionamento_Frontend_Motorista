@@ -3,4 +3,5 @@ import 'package:vagaja/src/app/widget_app.dart';
 
 void main() {
   runApp(AppWidget());
+
 }
