@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/Controllers/LoginController.dart';
 import 'package:vagaja/Controllers/CadastroController.dart';
 import 'package:vagaja/views/layouts/BarraLogo.dart';
 import 'package:vagaja/views/layouts/Input.dart';
