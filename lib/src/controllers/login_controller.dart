@@ -1,10 +1,36 @@
-import 'package:vagaja/src/models/user_model.dart';
+import 'package:flutter/material.dart';
+import 'package:vagaja/src/controllers/validacao_controller.dart';
 
 class LoginController {
-  UserModel _User = UserModel(username: "admin", password: "12345");
+  bool isLoginValid = false;
 
-  Future <bool> login(String username, String password) async{
-    await Future.delayed(Duration(seconds: 2));
-    return username == _User.username && password == _User.password;
+  bool get getIsLoginValid => isLoginValid;
+
+  void setLoginValid(bool value) {
+    isLoginValid = value;
+  }
+
+  getLoginValid() => isLoginValid;
+}
+
+class ValidarLoginController {
+  final TextEditingController _emailController;
+  final TextEditingController _senhaController;
+
+  ValidarLoginController(this._emailController, this._senhaController);
+
+  LoginController loginController = LoginController();
+
+  ValidacaoController validacaoController = ValidacaoController();
+
+  String validarLogin() {
+    if (!validacaoController.validarEmail(_emailController)) {
+      return 'E-mail inválido';
+    }
+    if (!validacaoController.validarSenha(_senhaController)) {
+      return 'Senha inválida';
+    }
+    loginController.setLoginValid(true);
+    return 'Login realizado com sucesso';
   }
 }

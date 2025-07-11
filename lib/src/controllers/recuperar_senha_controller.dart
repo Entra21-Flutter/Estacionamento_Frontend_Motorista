@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/controllers/ValidacaoController.dart';
+import 'package:vagaja/src/controllers/validacao_controller.dart';
+
 
 class RecuperarSenhaController {
   final TextEditingController _emailController;

@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/Controllers/LoginController.dart';
-import 'package:vagaja/Controllers/CadastroController.dart';
-import 'package:vagaja/views/layouts/BarraLogo.dart';
-import 'package:vagaja/views/layouts/Input.dart';
+import 'package:vagaja/src/controllers/recuperar_senha_controller.dart';
 
-// Tela de cadastro de motorista, usando um StatefulWidget para gerenciar o estado dos campos do formulário.
-class CadastroMotorista extends StatefulWidget {
-  const CadastroMotorista({super.key});
+import 'package:vagaja/src/layouts/barra_logo.dart';
+import 'package:vagaja/src/layouts/input.dart';
+
+class RecuperarSenha extends StatefulWidget {
+  const RecuperarSenha({super.key});
+
   @override
-  State<CadastroMotorista> createState() => _CadastroMotoristaState();
+  State<RecuperarSenha> createState() => _RecuperarSenhaState();
 }
 
-class _CadastroMotoristaState extends State<CadastroMotorista> {
-  // Chave global para identificar o formulário e validar seus campos.
+class _RecuperarSenhaState extends State<RecuperarSenha> {
   final _formKey = GlobalKey<FormState>();
-
-  // Controladores para capturar o texto digitado nos campos do formulário.
-  final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _cpfController = TextEditingController();
-  final TextEditingController _senhaController = TextEditingController();
-  final TextEditingController _confirmarSenhaController =
-      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +22,6 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
       // Barra superior da tela com o título.
       appBar: Barralogo(),
 
-      // ...existing code...
       body: Padding(
         padding: const EdgeInsets.all(1),
         child: Center(
@@ -43,7 +35,7 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
                     child: Text(
-                      'Cadastro Motorista',
+                      'Recuperar Senha',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -53,7 +45,7 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                           Shadow(
                             blurRadius: 4,
                             color: Colors.black12,
-                            offset: Offset(1, 2),
+                            offset: Offset(1, 1),
                           ),
                         ],
                       ),
@@ -61,16 +53,7 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                     ),
                   ),
                   // Inputs
-                  Input('Nome Completo', Icons.person, false, _nomeController),
-                  Input('CPF', Icons.credit_card, false, _cpfController),
                   Input('E-mail', Icons.email, false, _emailController),
-                  Input('Senha', Icons.lock, true, _senhaController),
-                  Input(
-                    'Confirmar Senha',
-                    Icons.lock_outline,
-                    true,
-                    _confirmarSenhaController,
-                  ),
 
                   // Botão de cadastro
                   const SizedBox(height: 18),
@@ -86,16 +69,10 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        CadastroController validarCadastroController =
-                            CadastroController(
-                              _nomeController,
-                              _emailController,
-                              _cpfController,
-                              _senhaController,
-                              _confirmarSenhaController,
-                            );
-                        String mensagem = validarCadastroController
-                            .validarCadastro();
+                        RecuperarSenhaController recuperarSenhaController =
+                            RecuperarSenhaController(_emailController);
+                        String mensagem = recuperarSenhaController
+                            .enviarEmail();
                         ScaffoldMessenger.of(
                           context,
                         ).showSnackBar(SnackBar(content: Text(mensagem)));
@@ -106,7 +83,6 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
                   // Separação vertical para opções de recuperação e login
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,7 +91,9 @@ class _CadastroMotoristaState extends State<CadastroMotorista> {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/login');
                         },
-                        child: const Text('Já tem uma conta? Faça login'),
+                        child: const Text(
+                          'Você já possui uma conta? Faça login!',
+                        ),
                       ),
                     ],
                   ),

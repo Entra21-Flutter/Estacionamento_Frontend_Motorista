@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/controllers/LoginController.dart';
-import 'package:vagaja/controllers/ValidacaoController.dart';
+import 'package:vagaja/src/controllers/login_controller.dart';
+import 'package:vagaja/src/controllers/validacao_controller.dart';
+
 
 class CadastroController {
   final TextEditingController _nomeController;

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vagaja/src/app/routes_app.dart';
 import 'package:vagaja/src/services/auth_service.dart';
 import 'package:vagaja/src/views/login_view.dart';
+import 'package:vagaja/src/views/recuperar_senha.dart';
+
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});

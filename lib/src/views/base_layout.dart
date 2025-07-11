@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:vagaja/src/layouts/custom_drawer.dart';
 import 'package:vagaja/src/layouts/custom_navbar.dart';
 

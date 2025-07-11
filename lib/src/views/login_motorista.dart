@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/controllers/RecuperarSenhaController.dart';
-import 'package:vagaja/views/layouts/BarraLogo.dart';
-import 'package:vagaja/views/layouts/Input.dart';
+import 'package:vagaja/src/controllers/login_controller.dart';
 
-class RecuperarSenha extends StatefulWidget {
-  const RecuperarSenha({super.key});
+import 'package:vagaja/src/layouts/barra_logo.dart';
+import 'package:vagaja/src/layouts/input.dart';
+
+class LoginMotorista extends StatefulWidget {
+  const LoginMotorista({super.key});
 
   @override
-  State<RecuperarSenha> createState() => _RecuperarSenhaState();
+  State<LoginMotorista> createState() => _LoginMotoristaState();
 }
 
-class _RecuperarSenhaState extends State<RecuperarSenha> {
+class _LoginMotoristaState extends State<LoginMotorista> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
       // Barra superior da tela com o título.
       appBar: Barralogo(),
 
+      // ...existing code...
       body: Padding(
         padding: const EdgeInsets.all(1),
         child: Center(
@@ -34,7 +37,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
                     child: Text(
-                      'Recuperar Senha',
+                      'Login',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -44,7 +47,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                           Shadow(
                             blurRadius: 4,
                             color: Colors.black12,
-                            offset: Offset(1, 1),
+                            offset: Offset(1, 2),
                           ),
                         ],
                       ),
@@ -53,6 +56,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                   ),
                   // Inputs
                   Input('E-mail', Icons.email, false, _emailController),
+                  Input('Senha', Icons.lock, true, _senhaController),
 
                   // Botão de cadastro
                   const SizedBox(height: 18),
@@ -68,30 +72,43 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        RecuperarSenhaController recuperarSenhaController =
-                            RecuperarSenhaController(_emailController);
-                        String mensagem = recuperarSenhaController
-                            .enviarEmail();
+                        ValidarLoginController validarLoginController =
+                            ValidarLoginController(
+                              _emailController,
+                              _senhaController,
+                            );
+                        String mensagem = validarLoginController.validarLogin();
                         ScaffoldMessenger.of(
                           context,
                         ).showSnackBar(SnackBar(content: Text(mensagem)));
                       },
                       child: const Text(
-                        'Cadastrar',
+                        'Entrar',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                   // Separação vertical para opções de recuperação e login
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/login');
+                          Navigator.pushReplacementNamed(
+                            context,
+                            '/recuperar-senha',
+                          );
+                        },
+                        child: const Text('Esqueceu a senha?'),
+                      ),
+
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/cadastro');
                         },
                         child: const Text(
-                          'Você já possui uma conta? Faça login!',
+                          'Não possui uma conta? Cadastre uma agora!',
                         ),
                       ),
                     ],
