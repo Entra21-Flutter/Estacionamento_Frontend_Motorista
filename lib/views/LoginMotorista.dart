@@ -34,6 +34,13 @@ class _LoginMotoristaState extends State<LoginMotorista> {
                 children: [
                   // Inserindo figura aprimorada da logo
                   Image.asset("assets/images/novologovagaja3.png", height: 100),
+                  // Inserindo figura aprimorada do banner
+                  Image.asset(
+                    "assets/images/novobannervagaja6.png",
+                    height: 60,
+                  ),
+                  //inserindo espaço entre o banner e o enunciado de login
+                  SizedBox(height: 30),
                   // Título estilizado com menos espaço acima
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
