@@ -19,8 +19,6 @@ class _LoginMotoristaState extends State<LoginMotorista> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[200],
-      // Barra superior da tela com o título.
-      appBar: Barralogo(),
 
       // ...existing code...
       body: Padding(
