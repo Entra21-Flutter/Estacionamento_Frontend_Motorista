@@ -32,6 +32,8 @@ class _LoginMotoristaState extends State<LoginMotorista> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Inserindo figura aprimorada da logo
+                  Image.asset("assets/images/novologovagaja3.png", height: 100),
                   // Título estilizado com menos espaço acima
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
