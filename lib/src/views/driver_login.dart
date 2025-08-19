@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/src/controllers/login_controller.dart';
+import 'package:vagaja/src/layouts/logo_bar.dart';
+import 'package:vagaja/src/layouts/Input.dart';
 
-import 'package:vagaja/src/layouts/barra_logo.dart';
-import 'package:vagaja/src/layouts/input.dart';
-
-class LoginMotorista extends StatefulWidget {
-  const LoginMotorista({super.key});
+class DriverLogin extends StatefulWidget {
+  const DriverLogin({super.key});
 
   @override
-  State<LoginMotorista> createState() => _LoginMotoristaState();
+  State<DriverLogin> createState() => _DriverLoginState();
 }
 
-class _LoginMotoristaState extends State<LoginMotorista> {
+class _DriverLoginState extends State<DriverLogin> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
@@ -33,6 +32,15 @@ class _LoginMotoristaState extends State<LoginMotorista> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Inserindo figura aprimorada da logo
+                  Image.asset("assets/images/novologovagaja3.png", height: 100),
+                  // Inserindo figura aprimorada do banner
+                  Image.asset(
+                    "assets/images/novobannervagaja6.png",
+                    height: 60,
+                  ),
+                  //inserindo espaço entre o banner e o enunciado de login
+                  SizedBox(height: 30),
                   // Título estilizado com menos espaço acima
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
@@ -72,8 +80,8 @@ class _LoginMotoristaState extends State<LoginMotorista> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        ValidarLoginController validarLoginController =
-                            ValidarLoginController(
+                        ValidationLoginController validarLoginController =
+                            ValidationLoginController(
                               _emailController,
                               _senhaController,
                             );
@@ -97,7 +105,7 @@ class _LoginMotoristaState extends State<LoginMotorista> {
                         onPressed: () {
                           Navigator.pushReplacementNamed(
                             context,
-                            '/recuperar-senha',
+                            '/recuperar_senha',
                           );
                         },
                         child: const Text('Esqueceu a senha?'),

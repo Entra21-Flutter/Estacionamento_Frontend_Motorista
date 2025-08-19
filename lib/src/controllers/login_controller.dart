@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/src/controllers/validacao_controller.dart';
+import 'package:vagaja/src/controllers/validation_controller.dart';
 
 class LoginController {
   bool isLoginValid = false;
@@ -13,15 +13,15 @@ class LoginController {
   getLoginValid() => isLoginValid;
 }
 
-class ValidarLoginController {
+class ValidationLoginController {
   final TextEditingController _emailController;
   final TextEditingController _senhaController;
 
-  ValidarLoginController(this._emailController, this._senhaController);
+  ValidationLoginController(this._emailController, this._senhaController);
 
   LoginController loginController = LoginController();
 
-  ValidacaoController validacaoController = ValidacaoController();
+  ValidationController validacaoController = ValidationController();
 
   String validarLogin() {
     if (!validacaoController.validarEmail(_emailController)) {

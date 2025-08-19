@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/src/controllers/login_controller.dart';
-import 'package:vagaja/src/controllers/validacao_controller.dart';
+import 'package:vagaja/src/controllers/validation_controller.dart';
 
 
-class CadastroController {
+class RegisterController {
   final TextEditingController _nomeController;
   final TextEditingController _emailController;
   final TextEditingController _cpfController;
   final TextEditingController _senhaController;
   final TextEditingController _confirmarSenhaController;
 
-  CadastroController(
+  RegisterController(
     this._nomeController,
     this._emailController,
     this._cpfController,
@@ -20,7 +20,7 @@ class CadastroController {
 
   LoginController loginController = LoginController();
 
-  ValidacaoController validacaoController = ValidacaoController();
+  ValidationController validacaoController = ValidationController();
   String validarCadastro() {
     if (!validacaoController.validarNomeCompleto(_nomeController)) {
       return 'Nome completo inválido';

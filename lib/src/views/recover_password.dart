@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/src/controllers/recuperar_senha_controller.dart';
+import 'package:vagaja/src/controllers/recover_password_controller.dart';
+import 'package:vagaja/src/layouts/Input.dart';
+import 'package:vagaja/src/layouts/logo_bar.dart';
 
-import 'package:vagaja/src/layouts/barra_logo.dart';
-import 'package:vagaja/src/layouts/input.dart';
-
-class RecuperarSenha extends StatefulWidget {
-  const RecuperarSenha({super.key});
+class RecoverPassword extends StatefulWidget {
+  const RecoverPassword({super.key});
 
   @override
-  State<RecuperarSenha> createState() => _RecuperarSenhaState();
+  State<RecoverPassword> createState() => _RecoverPasswordState();
 }
 
-class _RecuperarSenhaState extends State<RecuperarSenha> {
+class _RecoverPasswordState extends State<RecoverPassword> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
 
@@ -55,7 +54,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                   // Inputs
                   Input('E-mail', Icons.email, false, _emailController),
 
-                  // Botão de cadastro
+                 
                   const SizedBox(height: 18),
                   SizedBox(
                     width: 200,
@@ -69,8 +68,8 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        RecuperarSenhaController recuperarSenhaController =
-                            RecuperarSenhaController(_emailController);
+                        RecoverPasswordController recuperarSenhaController =
+                            RecoverPasswordController(_emailController);
                         String mensagem = recuperarSenhaController
                             .enviarEmail();
                         ScaffoldMessenger.of(
@@ -78,7 +77,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                         ).showSnackBar(SnackBar(content: Text(mensagem)));
                       },
                       child: const Text(
-                        'Cadastrar',
+                        'Continuar',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),

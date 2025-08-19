@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/src/controllers/validacao_controller.dart';
+import 'package:vagaja/src/controllers/validation_controller.dart';
 
 
-class RecuperarSenhaController {
+class RecoverPasswordController {
   final TextEditingController _emailController;
-  RecuperarSenhaController(this._emailController);
-  ValidacaoController validacaoController = ValidacaoController();
+  RecoverPasswordController(this._emailController);
+  ValidationController validacaoController = ValidationController();
 
   String enviarEmail() {
     TextEditingController email = _emailController;

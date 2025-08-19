@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/src/layouts/custom_drawer.dart';
-import 'package:vagaja/src/layouts/custom_navbar.dart';
+import 'package:vagaja/src/layouts/custom_nav_bar.dart';
 
 class BaseLayout extends StatelessWidget {
   final String title;
