@@ -5,14 +5,13 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
   const BarraNavegacao({super.key, required this.title});
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
-  @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title), backgroundColor: Colors.black12,
+      title: Text(title)//esse title vem do menu_app.dart
     );
   }
 
-
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
+

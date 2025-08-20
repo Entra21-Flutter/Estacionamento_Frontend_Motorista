@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class ValidacaoController {
+class ValidationController {
   bool validarNomeCompleto(TextEditingController nomeController) {
     String nome = nomeController.text.trim();
     // Nome deve ter pelo menos 5 letras e não conter números

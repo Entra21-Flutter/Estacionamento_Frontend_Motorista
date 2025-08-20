@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/src/app/menu_app.dart';
 import 'package:vagaja/src/services/auth_service.dart';
-import 'package:vagaja/src/views/login_view.dart';
+import 'package:vagaja/src/views/driver_login.dart';
+
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -40,7 +41,7 @@ class CustomDrawer extends StatelessWidget {
                 AuthService.logout();
                 Navigator.pushAndRemoveUntil(
                   context, 
-                  MaterialPageRoute(builder: (_) => const LoginView()), 
+                  MaterialPageRoute(builder: (_) => const DriverLogin()), 
                   (route) => false
                   );
               },

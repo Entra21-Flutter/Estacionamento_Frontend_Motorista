@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/controllers/LoginController.dart';
-import 'package:vagaja/views/layouts/BarraLogo.dart';
-import 'package:vagaja/views/layouts/Input.dart';
+import 'package:vagaja/src/controllers/register_controller.dart';
+import 'package:vagaja/src/layouts/Input.dart';
+import 'package:vagaja/src/layouts/logo_bar.dart';
 
-class LoginMotorista extends StatefulWidget {
-  const LoginMotorista({super.key});
-
+// Tela de cadastro de motorista, usando um StatefulWidget para gerenciar o estado dos campos do formulário.
+class DriverRegister extends StatefulWidget {
+  const DriverRegister({super.key});
   @override
-  State<LoginMotorista> createState() => _LoginMotoristaState();
+  State<DriverRegister> createState() => _DriverRegisterState();
 }
 
-class _LoginMotoristaState extends State<LoginMotorista> {
+class _DriverRegisterState extends State<DriverRegister> {
+  // Chave global para identificar o formulário e validar seus campos.
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _senhaController = TextEditingController();
 
+  // Controladores para capturar o texto digitado nos campos do formulário.
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _cpfController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+  final TextEditingController _confirmarSenhaController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[200],
       // Barra superior da tela com o título.
-      appBar: Barralogo(),
+      appBar: Barralogo(),  
 
       // ...existing code...
       body: Padding(
@@ -32,20 +38,11 @@ class _LoginMotoristaState extends State<LoginMotorista> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Inserindo figura aprimorada da logo
-                  Image.asset("assets/images/novologovagaja3.png", height: 100),
-                  // Inserindo figura aprimorada do banner
-                  Image.asset(
-                    "assets/images/novobannervagaja6.png",
-                    height: 60,
-                  ),
-                  //inserindo espaço entre o banner e o enunciado de login
-                  SizedBox(height: 30),
                   // Título estilizado com menos espaço acima
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
                     child: Text(
-                      'Login',
+                      'Cadastro Motorista',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -63,8 +60,16 @@ class _LoginMotoristaState extends State<LoginMotorista> {
                     ),
                   ),
                   // Inputs
+                  Input('Nome Completo', Icons.person, false, _nomeController),
+                  Input('CPF', Icons.credit_card, false, _cpfController),
                   Input('E-mail', Icons.email, false, _emailController),
                   Input('Senha', Icons.lock, true, _senhaController),
+                  Input(
+                    'Confirmar Senha',
+                    Icons.lock_outline,
+                    true,
+                    _confirmarSenhaController,
+                  ),
 
                   // Botão de cadastro
                   const SizedBox(height: 18),
@@ -80,18 +85,22 @@ class _LoginMotoristaState extends State<LoginMotorista> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        ValidarLoginController validarLoginController =
-                            ValidarLoginController(
+                        RegisterController validarCadastroController =
+                            RegisterController(
+                              _nomeController,
                               _emailController,
+                              _cpfController,
                               _senhaController,
+                              _confirmarSenhaController,
                             );
-                        String mensagem = validarLoginController.validarLogin();
+                        String mensagem = validarCadastroController
+                            .validarCadastro();
                         ScaffoldMessenger.of(
                           context,
                         ).showSnackBar(SnackBar(content: Text(mensagem)));
                       },
                       child: const Text(
-                        'Entrar',
+                        'Cadastrar',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
@@ -103,21 +112,9 @@ class _LoginMotoristaState extends State<LoginMotorista> {
                     children: [
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            '/recuperar-senha',
-                          );
+                          Navigator.pushReplacementNamed(context, '/login');
                         },
-                        child: const Text('Esqueceu a senha?'),
-                      ),
-
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/cadastro');
-                        },
-                        child: const Text(
-                          'Não possui uma conta? Cadastre uma agora!',
-                        ),
+                        child: const Text('Já tem uma conta? Faça login'),
                       ),
                     ],
                   ),

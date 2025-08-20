@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/controllers/RecuperarSenhaController.dart';
-import 'package:vagaja/views/layouts/BarraLogo.dart';
-import 'package:vagaja/views/layouts/Input.dart';
+import 'package:vagaja/src/controllers/login_controller.dart';
+import 'package:vagaja/src/layouts/logo_bar.dart';
+import 'package:vagaja/src/layouts/Input.dart';
 
-class RecuperarSenha extends StatefulWidget {
-  const RecuperarSenha({super.key});
+class DriverLogin extends StatefulWidget {
+  const DriverLogin({super.key});
 
   @override
-  State<RecuperarSenha> createState() => _RecuperarSenhaState();
+  State<DriverLogin> createState() => _DriverLoginState();
 }
 
-class _RecuperarSenhaState extends State<RecuperarSenha> {
+class _DriverLoginState extends State<DriverLogin> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
       // Barra superior da tela com o título.
       appBar: Barralogo(),
 
+      // ...existing code...
       body: Padding(
         padding: const EdgeInsets.all(1),
         child: Center(
@@ -30,11 +32,20 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Inserindo figura aprimorada da logo
+                  Image.asset("assets/images/novologovagaja3.png", height: 100),
+                  // Inserindo figura aprimorada do banner
+                  Image.asset(
+                    "assets/images/novobannervagaja6.png",
+                    height: 60,
+                  ),
+                  //inserindo espaço entre o banner e o enunciado de login
+                  SizedBox(height: 30),
                   // Título estilizado com menos espaço acima
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
                     child: Text(
-                      'Recuperar Senha',
+                      'Login',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -44,7 +55,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                           Shadow(
                             blurRadius: 4,
                             color: Colors.black12,
-                            offset: Offset(1, 1),
+                            offset: Offset(1, 2),
                           ),
                         ],
                       ),
@@ -53,6 +64,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                   ),
                   // Inputs
                   Input('E-mail', Icons.email, false, _emailController),
+                  Input('Senha', Icons.lock, true, _senhaController),
 
                   // Botão de cadastro
                   const SizedBox(height: 18),
@@ -68,30 +80,43 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                         elevation: 2,
                       ),
                       onPressed: () {
-                        RecuperarSenhaController recuperarSenhaController =
-                            RecuperarSenhaController(_emailController);
-                        String mensagem = recuperarSenhaController
-                            .enviarEmail();
+                        ValidationLoginController validarLoginController =
+                            ValidationLoginController(
+                              _emailController,
+                              _senhaController,
+                            );
+                        String mensagem = validarLoginController.validarLogin();
                         ScaffoldMessenger.of(
                           context,
                         ).showSnackBar(SnackBar(content: Text(mensagem)));
                       },
                       child: const Text(
-                        'Cadastrar',
+                        'Entrar',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                   // Separação vertical para opções de recuperação e login
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/login');
+                          Navigator.pushReplacementNamed(
+                            context,
+                            '/recuperar_senha',
+                          );
+                        },
+                        child: const Text('Esqueceu a senha?'),
+                      ),
+
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/cadastro');
                         },
                         child: const Text(
-                          'Você já possui uma conta? Faça login!',
+                          'Não possui uma conta? Cadastre uma agora!',
                         ),
                       ),
                     ],
