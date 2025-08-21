@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vagaja/src/controllers/validation_controller.dart';
 
 class LoginController {
-  bool isLoginValid = false;
+  bool isLoginValid = true;
 
   bool get getIsLoginValid => isLoginValid;
 
@@ -28,8 +28,9 @@ class ValidationLoginController {
       return 'E-mail inválido';
     }
     if (!validacaoController.validarSenha(_senhaController)) {
-      return 'Senha inválida';
+      return 'Senha inválida (mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 caractere especial)';
     }
+    
     loginController.setLoginValid(true);
     return 'Login realizado com sucesso';
   }

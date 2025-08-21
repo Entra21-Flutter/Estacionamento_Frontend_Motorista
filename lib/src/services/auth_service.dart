@@ -1,5 +1,6 @@
 class AuthService {
-  static bool isLoggedIn = false; // false para ter que logar
+  //não está sendo usado
+  static bool isLoggedIn = true; // false para ter que logar
 
   static void login(){
     isLoggedIn = true;
