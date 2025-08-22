@@ -14,6 +14,20 @@ class _DriverLoginState extends State<DriverLogin> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
+  
+  void _handleLogin() async {
+    ValidationLoginController validarLoginController =
+        ValidationLoginController(
+          _emailController, 
+          _senhaController
+          );    
+    if (validarLoginController.validarLogin()) {
+      validarLoginController.mostrarMensagem(context);
+      Navigator.pushReplacementNamed(context, "/home");
+    }else{
+      validarLoginController.mostrarMensagem(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,17 +93,7 @@ class _DriverLoginState extends State<DriverLogin> {
                         ),
                         elevation: 2,
                       ),
-                      onPressed: () {
-                        ValidationLoginController validarLoginController =
-                            ValidationLoginController(
-                              _emailController,
-                              _senhaController,
-                            );
-                        String mensagem = validarLoginController.validarLogin();
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text(mensagem)));
-                      },
+                      onPressed: () {_handleLogin();},
                       child: const Text(
                         'Entrar',
                         style: TextStyle(fontSize: 18, color: Colors.white),

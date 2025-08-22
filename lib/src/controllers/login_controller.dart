@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/src/controllers/validation_controller.dart';
-
-class LoginController {
-  bool isLoginValid = true;
-
-  bool get getIsLoginValid => isLoginValid;
-
-  void setLoginValid(bool value) {
-    isLoginValid = value;
-  }
-
-  getLoginValid() => isLoginValid;
-}
+import 'package:vagaja/src/services/auth_service.dart';
 
 class ValidationLoginController {
   final TextEditingController _emailController;
   final TextEditingController _senhaController;
+  String mensagem = "";
 
   ValidationLoginController(this._emailController, this._senhaController);
 
-  LoginController loginController = LoginController();
-
   ValidationController validacaoController = ValidationController();
 
-  String validarLogin() {
+  bool validarLogin() {
+    
     if (!validacaoController.validarEmail(_emailController)) {
-      return 'E-mail inválido';
+      mensagem = 'E-mail inválido';
+      return  false;
     }
     if (!validacaoController.validarSenha(_senhaController)) {
-      return 'Senha inválida (mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 caractere especial)';
+      mensagem ='Senha inválida (mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 caractere especial)';
+      return false;
     }
     
-    loginController.setLoginValid(true);
-    return 'Login realizado com sucesso';
+    AuthService.login();
+    mensagem = 'Login realizado com sucesso';
+    return true;
+  }
+
+  void mostrarMensagem(BuildContext context){
+  ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(mensagem)));
   }
 }
+

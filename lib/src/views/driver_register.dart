@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vagaja/src/controllers/register_controller.dart';
 import 'package:vagaja/src/layouts/Input.dart';
 import 'package:vagaja/src/layouts/logo_bar.dart';
+import 'package:vagaja/src/services/auth_service.dart';
 
 // Tela de cadastro de motorista, usando um StatefulWidget para gerenciar o estado dos campos do formulário.
 class DriverRegister extends StatefulWidget {
@@ -19,8 +20,14 @@ class _DriverRegisterState extends State<DriverRegister> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _cpfController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
-  final TextEditingController _confirmarSenhaController =
-      TextEditingController();
+  final TextEditingController _confirmarSenhaController = TextEditingController();
+  String mensagem = "";
+
+   void _handleLogin() async{
+    if (AuthService.isLoggedIn) {
+      Navigator.pushReplacementNamed(context, "/home");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,8 +100,8 @@ class _DriverRegisterState extends State<DriverRegister> {
                               _senhaController,
                               _confirmarSenhaController,
                             );
-                        String mensagem = validarCadastroController
-                            .validarCadastro();
+                        mensagem = validarCadastroController.validarCadastro();
+                        _handleLogin();
                         ScaffoldMessenger.of(
                           context,
                         ).showSnackBar(SnackBar(content: Text(mensagem)));

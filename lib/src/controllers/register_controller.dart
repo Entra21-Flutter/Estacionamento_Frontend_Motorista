@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/src/controllers/login_controller.dart';
 import 'package:vagaja/src/controllers/validation_controller.dart';
+import 'package:vagaja/src/services/auth_service.dart';
 
 
 class RegisterController {
@@ -18,7 +18,7 @@ class RegisterController {
     this._confirmarSenhaController,
   );
 
-  LoginController loginController = LoginController();
+  // LoginController loginController = LoginController();
 
   ValidationController validacaoController = ValidationController();
   String validarCadastro() {
@@ -40,7 +40,7 @@ class RegisterController {
     )) {
       return 'As senhas não coincidem';
     }
-    loginController.setLoginValid(true);
+    AuthService.login();
     return 'Cadastro realizado com sucesso';
   }
 }
