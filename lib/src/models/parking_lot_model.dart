@@ -1,13 +1,14 @@
 class ParkingLotModel {
   final String name;
-  final double lat; //latitude
-  final double lng;
+  final double latitude; 
+  final double longitude;
 
   ParkingLotModel({
     required this.name, 
-    required this.lat, 
-    required this.lng
-    }); //longitude
-  
+    required this.latitude, 
+    required this.longitude
+  });
+
+
 
 }

@@ -14,13 +14,13 @@ class CustomDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           Container(
-            color: Colors.blueGrey,
+            color: Colors.blueGrey[100],
             height: 130,
             alignment: Alignment.center,
             child: Padding(
               padding: EdgeInsets.only(top: 30, bottom: 3),
               child: Center(
-                child: Image.asset("assets/images/Logo.jpg",scale: 1.6,),
+                child: Image.asset("assets/images/novologovagaja3.png",scale: 1.6,),
               ),
             ),
             ),

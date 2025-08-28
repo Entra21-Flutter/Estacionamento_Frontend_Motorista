@@ -1,7 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart';
+import 'package:vagaja/src/services/marker_service.dart';
 
 
 class DriverMap extends StatefulWidget {
@@ -13,81 +15,43 @@ class DriverMap extends StatefulWidget {
 
 class DriverMapState extends State<DriverMap> {
   late GoogleMapController mapController;
-
-  final List<Map<String, dynamic>> _estacionamentos = [
-    //posição real desses estacionamentos que estão perto da proway
-    {"nome": "Royal park estacionamento ", "lat": -26.91827120339458, "lng": -49.06977352086222}, // -26.91827120339458, -49.06977352086222
-    {"nome": "Auto serve estacionamento", "lat": -26.915121139121357, "lng": -49.0689695126889}, // -26.915121139121357, -49.0689695126889
-    {"nome": "Estacionamento WF", "lat": -26.91646435413369, "lng": -49.070906304004545}, // -26.91646435413369, -49.070906304004545
-  ];
-
- double _calcularDistancia(LatLng a, LatLng b) {
-    const R = 6371; // raio da Terra em km
-    final dLat = (b.latitude - a.latitude) * pi / 180;
-    final dLng = (b.longitude - a.longitude) * pi / 180;
-
-    final lat1 = a.latitude * pi / 180;
-    final lat2 = b.latitude * pi / 180;
-
-    final h = sin(dLat / 2) * sin(dLat / 2) +
-        sin(dLng / 2) * sin(dLng / 2) * cos(lat1) * cos(lat2);
-
-    return 2 * R * atan2(sqrt(h), sqrt(1 - h));
-  }
-
+  static const double ZOOM_INICIAL = 18.0;
+  final TextEditingController searchController = TextEditingController();
   final LatLng _proway = const LatLng(-26.91688151149824, -49.07039859921882); // Exemplo: proway
-  Set<Marker> _criarMarkers() {
-    final markers = <Marker>{};
-
-    // marcador do ponto selecionado
-    if (_proway != null) {
-      markers.add(Marker(
-        markerId: const MarkerId("pontoSelecionado"),
-        position: _proway!,
-        infoWindow: const InfoWindow(title: "Local Selecionado"),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      ));
-
-      // adiciona estacionamentos próximos
-      for (var est in _estacionamentos) {
-        final estPos = LatLng(est["lat"], est["lng"]);
-        final dist = _calcularDistancia(_proway!, estPos);
-
-        if (dist <= 1.0) { // filtra estacionamentos até 1 km
-          markers.add(Marker(
-            markerId: MarkerId(est["nome"]),
-            position: estPos,
-            infoWindow: InfoWindow(
-              title: est["nome"],
-              snippet: "Distância: ${dist.toStringAsFixed(2)} km",
-            ),
-            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-          ));
-        }
-      }
-    }
-
-    return markers;
-  }
-
-
+  final String apikey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? "";
+  
+  MarkerService marker = MarkerService();
+  final String _estiloMapa = '''
+[{
+    "featureType": "poi",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+    }]
+    ''';
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
+      body: Stack(
+        children: [
+          GoogleMap(
+        myLocationButtonEnabled: true,
+        style: _estiloMapa,
         buildingsEnabled: false,
-        
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: _proway,
-          zoom: 18.0
+          zoom: ZOOM_INICIAL
           ),
-        markers: _criarMarkers(),
+        markers: marker.criarMarkers(),
+          ),
+        ]
       ),
     );
+
   }
 }
