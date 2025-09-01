@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
+import 'package:vagaja/src/controllers/maps_controller.dart';
 import 'package:vagaja/src/services/marker_service.dart';
 
 
@@ -21,6 +22,8 @@ class DriverMapState extends State<DriverMap> {
   final String apikey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? "";
   
   MarkerService marker = MarkerService();
+  MapsController mapsController = MapsController();
+
   final String _estiloMapa = '''
 [{
     "featureType": "poi",
@@ -32,22 +35,22 @@ class DriverMapState extends State<DriverMap> {
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           GoogleMap(
-        myLocationButtonEnabled: true,
-        style: _estiloMapa,
-        buildingsEnabled: false,
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: _proway,
-          zoom: ZOOM_INICIAL
-          ),
-        markers: marker.criarMarkers(),
+            myLocationButtonEnabled: true,
+            style: _estiloMapa,
+            buildingsEnabled: false,
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: _proway,
+              zoom: ZOOM_INICIAL
+            ),
+            markers: marker.criarMarkers(onTap: mapsController.marcadorClicado),
           ),
         ]
       ),

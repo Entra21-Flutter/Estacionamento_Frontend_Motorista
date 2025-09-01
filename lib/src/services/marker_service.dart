@@ -10,7 +10,7 @@ class MarkerService {
     {"nome": "Estacionamento WF", "lat": -26.91646435413369, "lng": -49.070906304004545}, // -26.91646435413369, -49.070906304004545
   ];
 
- double calcularDistancia(LatLng a, LatLng b) {
+  double calcularDistancia(LatLng a, LatLng b) {
     const R = 6371; // raio da Terra em km
     final dLat = (b.latitude - a.latitude) * pi / 180;
     final dLng = (b.longitude - a.longitude) * pi / 180;
@@ -26,7 +26,7 @@ class MarkerService {
 
   final LatLng _proway = const LatLng(-26.91688151149824, -49.07039859921882); // Exemplo: proway
 
-  Set<Marker> criarMarkers() {
+  Set<Marker> criarMarkers({required Function(Marker) onTap}) {
     final markers = <Marker>{};
     
     // LatLng? _pontoSelecionado;
@@ -46,15 +46,22 @@ class MarkerService {
         final dist = calcularDistancia(_proway!, estPos);
 
         if (dist <= 1.0) { // filtra estacionamentos até 1 km
-          markers.add(Marker(
+          markers.add(
+            Marker(
             markerId: MarkerId(est["nome"]),
             position: estPos,
             infoWindow: InfoWindow(
               title: est["nome"],
               snippet: "Distância: ${dist.toStringAsFixed(2)} km",
             ),
+            
             icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-          ));
+
+          onTap: () => onTap(
+          Marker(
+            markerId: MarkerId(est["nome"]),
+          )))
+          );
         }
       }
     }

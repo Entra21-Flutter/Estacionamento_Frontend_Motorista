@@ -32,10 +32,6 @@ class _DriverRegisterState extends State<DriverRegister> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[200],
-      // Barra superior da tela com o título.
-      appBar: Barralogo(),  
-
-      // ...existing code...
       body: Padding(
         padding: const EdgeInsets.all(1),
         child: Center(
@@ -43,13 +39,19 @@ class _DriverRegisterState extends State<DriverRegister> {
             child: Form(
               key: _formKey,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Inserindo figura aprimorada da logo
+                  Image.asset("assets/images/novologovagaja3.png", height: 100),
+                  // Inserindo figura aprimorada do banner
+                  Image.asset(
+                    "assets/images/novobannervagaja6.png",
+                    height: 60,
+                  ),
                   // Título estilizado com menos espaço acima
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
                     child: Text(
-                      'Cadastro Motorista',
+                      'Cadastro',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,

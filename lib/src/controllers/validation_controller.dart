@@ -44,9 +44,8 @@ class ValidationController {
 
   bool validarSenha(TextEditingController senhaController) {
     String senha = senhaController.text;
-    // Mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número, 1 caractere especial
-    final regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$');
-    return regex.hasMatch(senha);
+
+    return senha.isNotEmpty;
   }
 
   bool validarConfirmarSenha(

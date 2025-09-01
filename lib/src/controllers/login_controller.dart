@@ -18,7 +18,7 @@ class ValidationLoginController {
       return  false;
     }
     if (!validacaoController.validarSenha(_senhaController)) {
-      mensagem ='Senha inválida (mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 caractere especial)';
+      mensagem ='Informe uma senha';
       return false;
     }
     
