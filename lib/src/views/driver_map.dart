@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_places_flutter/google_places_flutter.dart';
-import 'package:google_places_flutter/model/prediction.dart';
+
 import 'package:vagaja/src/controllers/maps_controller.dart';
 import 'package:vagaja/src/services/marker_service.dart';
+import 'package:vagaja/src/views/info_park.dart';
 
 
 class DriverMap extends StatefulWidget {
@@ -34,6 +34,19 @@ class DriverMapState extends State<DriverMap> {
     ''';
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    mapsController.onMarkerTap = (marker) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => InformacaoEstacionamento(estacionamento: marker),
+        ),
+      );
+    };
   }
 
   @override

@@ -1,9 +1,11 @@
-  import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapsController {
+  void Function(Marker)? onMarkerTap;
 
-void marcadorClicado(Marker marker) {
-    // Sua lógica aqui
-    
+  void marcadorClicado(Marker marker) {
+    if (onMarkerTap != null) {
+      onMarkerTap!(marker);
+    }
   }
 }
