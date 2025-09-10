@@ -4,7 +4,6 @@ import 'package:vagaja/src/views/driver_history.dart';
 import 'package:vagaja/src/views/driver_map.dart';
 import 'package:vagaja/src/views/driver_reservation.dart';
 
-
 final List<MenuModel> appMenuitens = [
     MenuModel(
     title: "Reservas", 
@@ -12,22 +11,16 @@ final List<MenuModel> appMenuitens = [
     route: "/reservas",
     page: DriverReservation()
     ),
-
     MenuModel(
     title: "Mapa", 
     icon: Icons.map_sharp,
     route: "/maps",
     page: DriverMap()
     ),
-
     MenuModel(
     title: "Historico", 
     icon: Icons.history_edu,
     route: "/history",
     page: DriverHistory()
     ),
-    
-
-
-
 ];
