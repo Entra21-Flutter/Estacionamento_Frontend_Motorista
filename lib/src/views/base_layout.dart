@@ -20,7 +20,7 @@ class BaseLayout extends StatelessWidget {
       appBar: BarraNavegacao(),
       body: body,
       bottomNavigationBar: CustomBottomBarLayout(
-        selectedIndex: selectedIndex, // ✅ recebe aqui
+        selectedIndex: selectedIndex, 
       ),
     );
   }

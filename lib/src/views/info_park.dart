@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class infoPark extends StatefulWidget {
+class InfoPark extends StatefulWidget {
   final Marker? estacionamento;
   final double precoPorMinuto;
   static const double precoPorHora = 10.00;
 
-  const infoPark({
+  const InfoPark({
     super.key,
     required this.estacionamento,
     double? precoPorMinuto,
   }) : precoPorMinuto = precoPorMinuto ?? precoPorHora / 60;
 
   @override
-  State<infoPark> createState() => _InfoParkState();
+  State<InfoPark> createState() => _InfoParkState();
 }
 
-class _InfoParkState extends State<infoPark> {
+class _InfoParkState extends State<InfoPark> {
   int vagasCobertas = 5; // valor fictício
   int vagasDescobertas = 8; // valor fictício
 
@@ -90,7 +90,7 @@ class _InfoParkState extends State<infoPark> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Preço hora: R\$ ${infoPark.precoPorHora.toStringAsFixed(2)}',
+              'Preço hora: R\$ ${InfoPark.precoPorHora.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 16),

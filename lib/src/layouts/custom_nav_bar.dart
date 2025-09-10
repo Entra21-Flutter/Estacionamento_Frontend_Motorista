@@ -13,7 +13,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         leading : 
            IconButton(
-            icon: const Icon(Icons.logout, size: 30,),
+            icon: const Icon(Icons.logout, size: 30, color: Colors.redAccent,),
             onPressed: () {
               AuthService.logout();
               Navigator.pushAndRemoveUntil(
@@ -26,7 +26,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
           
           // Botão de perfil
           actions: [ IconButton(
-            icon: const Icon(Icons.person_pin, size: 40,),
+            icon: const Icon(Icons.person_pin, size: 40, color: Colors.blueAccent,),
             onPressed: () {
               Navigator.pushNamed(context, "/perfil"); 
             },

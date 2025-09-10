@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/src/controllers/validation_controller.dart';
+
 import 'package:vagaja/src/services/auth_service.dart';
+import 'package:vagaja/src/services/validation_service.dart';
 
 class ValidationLoginController {
   final TextEditingController _emailController;
@@ -9,15 +10,15 @@ class ValidationLoginController {
 
   ValidationLoginController(this._emailController, this._senhaController);
 
-  ValidationController validacaoController = ValidationController();
+  ValidationService validacaoService = ValidationService();
 
   bool validarLogin() {
     
-    if (!validacaoController.validarEmail(_emailController)) {
+    if (!validacaoService.validarEmail(_emailController)) {
       mensagem = 'E-mail inválido';
       return  false;
     }
-    if (!validacaoController.validarSenha(_senhaController)) {
+    if (!validacaoService.validarSenha(_senhaController)) {
       mensagem ='Informe uma senha';
       return false;
     }

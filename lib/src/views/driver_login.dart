@@ -34,7 +34,6 @@ class _DriverLoginState extends State<DriverLogin> {
     return Scaffold(
       backgroundColor: Colors.blue[200],
       // Barra superior da tela com o título.
-      // ...existing code...
       body: Padding(
         padding: const EdgeInsets.all(1),
         child: Center(

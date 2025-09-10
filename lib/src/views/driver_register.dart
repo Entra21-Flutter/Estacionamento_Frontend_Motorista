@@ -24,7 +24,7 @@ class _DriverRegisterState extends State<DriverRegister> {
 
    void _handleLogin() async{
     if (AuthService.isLoggedIn) {
-      Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, "/maps");
     }
   }
   @override

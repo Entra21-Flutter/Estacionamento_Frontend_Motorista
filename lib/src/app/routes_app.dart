@@ -11,7 +11,7 @@ Map<String, WidgetBuilder> generateRoutes() {
     routes[item.route] = (context) => BaseLayout(
           title: item.title,
           body: item.page,
-          selectedIndex: i, // ✅ passa o índice correto
+          selectedIndex: i,
         );
   }
 

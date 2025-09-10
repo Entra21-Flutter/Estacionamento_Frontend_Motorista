@@ -39,7 +39,7 @@ class DriverMapState extends State<DriverMap> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => infoPark(estacionamento: marker),
+          builder: (_) => InfoPark(estacionamento: marker),
         ),
       );
     };

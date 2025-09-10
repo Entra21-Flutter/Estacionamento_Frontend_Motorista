@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vagaja/src/controllers/validation_controller.dart';
+
 import 'package:vagaja/src/services/auth_service.dart';
+import 'package:vagaja/src/services/validation_service.dart';
 
 
 class RegisterController {
@@ -20,21 +21,21 @@ class RegisterController {
 
   // LoginController loginController = LoginController();
 
-  ValidationController validacaoController = ValidationController();
+  ValidationService validacaoService = ValidationService();
   String validarCadastro() {
-    if (!validacaoController.validarNomeCompleto(_nomeController)) {
+    if (!validacaoService.validarNomeCompleto(_nomeController)) {
       return 'Nome completo inválido';
     }
-    if (!validacaoController.validarCpf(_cpfController)) {
+    if (!validacaoService.validarCpf(_cpfController)) {
       return 'CPF inválido';
     }
-    if (!validacaoController.validarEmail(_emailController)) {
+    if (!validacaoService.validarEmail(_emailController)) {
       return 'E-mail inválido';
     }
-    if (!validacaoController.validarSenha(_senhaController)) {
+    if (!validacaoService.validarSenha(_senhaController)) {
       return 'Senha inválida (mínimo 6 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 caractere especial)';
     }
-    if (!validacaoController.validarConfirmarSenha(
+    if (!validacaoService.validarConfirmarSenha(
       _confirmarSenhaController,
       _senhaController,
     )) {

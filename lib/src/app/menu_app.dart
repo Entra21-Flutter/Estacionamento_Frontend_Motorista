@@ -20,7 +20,6 @@ final List<MenuModel> appMenuitens = [
     page: DriverMap()
     ),
 
-    
     MenuModel(
     title: "Historico de pagamento", 
     icon: Icons.history_edu,

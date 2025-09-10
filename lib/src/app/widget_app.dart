@@ -15,13 +15,12 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "VagaJá",
-      // /home
       initialRoute: AuthService.isLoggedIn ? "/maps" : "/login",
       routes: {
         '/login' : (context) => const DriverLogin(),
         '/cadastro' : (context) => const DriverRegister(),
         '/recuperar_senha' : (context) => const RecoverPassword(),
-        '/informacao_estacionamento' : (context) => infoPark(estacionamento: null,),
+        '/informacao_estacionamento' : (context) => InfoPark(estacionamento: null,),
         '/perfil' : (context) => const UserProfile(),
         ...generateRoutes()
       },
