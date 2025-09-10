@@ -32,9 +32,15 @@ class _DriverLoginState extends State<DriverLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[200],
-      // Barra superior da tela com o título.
-      body: Padding(
+     body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.white],
+          ),
+        ),
+      child: Padding(
         padding: const EdgeInsets.all(1),
         child: Center(
           child: SingleChildScrollView(
@@ -128,6 +134,7 @@ class _DriverLoginState extends State<DriverLogin> {
           ),
         ),
       ),
+    ),
     );
   }
 }

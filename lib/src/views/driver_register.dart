@@ -30,8 +30,15 @@ class _DriverRegisterState extends State<DriverRegister> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[200],
-      body: Padding(
+     body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.white],
+          ),
+        ),
+      child: Padding(
         padding: const EdgeInsets.all(1),
         child: Center(
           child: SingleChildScrollView(
@@ -46,6 +53,7 @@ class _DriverRegisterState extends State<DriverRegister> {
                     "assets/images/novobannervagaja6.png",
                     height: 60,
                   ),
+                  SizedBox(height: 30),
                   // Título estilizado com menos espaço acima
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
@@ -132,6 +140,7 @@ class _DriverRegisterState extends State<DriverRegister> {
           ),
         ),
       ),
+     ),
     );
   }
 }
