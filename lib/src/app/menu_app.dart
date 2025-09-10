@@ -10,7 +10,7 @@ final List<MenuModel> appMenuitens = [
     title: "Reservas", 
     icon: Icons.bookmark,
     route: "/reservas",
-    page: driverReservation()
+    page: DriverReservation()
     ),
 
     MenuModel(
@@ -21,10 +21,10 @@ final List<MenuModel> appMenuitens = [
     ),
 
     MenuModel(
-    title: "Historico de pagamento", 
+    title: "Historico", 
     icon: Icons.history_edu,
     route: "/history",
-    page: driverHistory()
+    page: DriverHistory()
     ),
     
 

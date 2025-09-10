@@ -3,8 +3,8 @@ import 'package:vagaja/src/views/driver_reservation.dart';
 
 // Importe ou crie o widget DetalheHistoricoPage conforme necessário
 
-class driverHistory extends StatelessWidget {
-  const driverHistory({super.key});
+class DriverHistory extends StatelessWidget {
+  const DriverHistory({super.key});
 
   @override
   Widget build(BuildContext context) {

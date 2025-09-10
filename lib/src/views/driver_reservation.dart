@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class driverReservation extends StatelessWidget {
-  const driverReservation({super.key});
+class DriverReservation extends StatelessWidget {
+  const DriverReservation({super.key});
 
   @override
   Widget build(BuildContext context) {
