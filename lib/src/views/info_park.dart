@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class InformacaoEstacionamento extends StatefulWidget {
   final Marker? estacionamento;
 
-  InformacaoEstacionamento({
+  const InformacaoEstacionamento({
     super.key,
     required this.estacionamento,
   });

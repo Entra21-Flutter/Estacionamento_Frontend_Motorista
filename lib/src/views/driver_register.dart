@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/src/controllers/register_controller.dart';
 import 'package:vagaja/src/layouts/Input.dart';
-import 'package:vagaja/src/layouts/logo_bar.dart';
 import 'package:vagaja/src/services/auth_service.dart';
 
 // Tela de cadastro de motorista, usando um StatefulWidget para gerenciar o estado dos campos do formulário.

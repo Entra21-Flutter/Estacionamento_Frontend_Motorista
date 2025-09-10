@@ -16,7 +16,7 @@ class DriverMap extends StatefulWidget {
 
 class DriverMapState extends State<DriverMap> {
   late GoogleMapController mapController;
-  static const double ZOOM_INICIAL = 18.0;
+  static const double zoomInicial = 18.0;
   final TextEditingController searchController = TextEditingController();
   final LatLng _proway = const LatLng(-26.91688151149824, -49.07039859921882); // Exemplo: proway
   final String apikey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? "";
@@ -61,7 +61,7 @@ class DriverMapState extends State<DriverMap> {
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: _proway,
-              zoom: ZOOM_INICIAL
+              zoom: zoomInicial
             ),
             markers: marker.criarMarkers(onTap: mapsController.marcadorClicado),
           ),
