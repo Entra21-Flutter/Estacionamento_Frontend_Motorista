@@ -5,6 +5,7 @@ import 'package:vagaja/src/views/driver_login.dart';
 import 'package:vagaja/src/views/driver_register.dart';
 import 'package:vagaja/src/views/info_park.dart';
 import 'package:vagaja/src/views/recover_password.dart';
+import 'package:vagaja/src/views/user_profile.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -21,6 +22,7 @@ class AppWidget extends StatelessWidget {
         '/cadastro' : (context) => const DriverRegister(),
         '/recuperar_senha' : (context) => const RecoverPassword(),
         '/informacao_estacionamento' : (context) => infoPark(estacionamento: null,),
+        '/perfil' : (context) => const UserProfile(),
         ...generateRoutes()
       },
 

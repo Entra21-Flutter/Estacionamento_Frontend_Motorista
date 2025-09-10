@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vagaja/src/controllers/login_controller.dart';
-import 'package:vagaja/src/layouts/logo_bar.dart';
+
 import 'package:vagaja/src/layouts/Input.dart';
 
 class DriverLogin extends StatefulWidget {

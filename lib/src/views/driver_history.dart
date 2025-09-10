@@ -10,40 +10,21 @@ class driverHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, String>> historicoEstacionamento = [
       {
-        "nome": "Estacionamento1",
+        "nome": "VagasNow",
         "preco": "R\$20",
         "data": "08/09/2025 - 10:00"
       },
       {
-        "nome": "Estacionamento2",
+        "nome": "TopVagas",
         "preco": "R\$40",
         "data": "07/09/2025 - 15:30"
       },
       {
-        "nome": "Estacionamento3",
+        "nome": "SemEspera",
         "preco": "R\$10",
         "data": "06/09/2025 - 09:20"
       },
-      {
-        "nome": "Estacionamento4",
-        "preco": "R\$20",
-        "data": "05/09/2025 - 18:00"
-      },
-      {
-        "nome": "Estacionamento5",
-        "preco": "R\$40",
-        "data": "04/09/2025 - 12:45"
-      },
-      {
-        "nome": "Estacionamento6",
-        "preco": "R\$10",
-        "data": "03/09/2025 - 08:10"
-      },
-      {
-        "nome": "Estacionamento7",
-        "preco": "R\$10",
-        "data": "02/09/2025 - 14:50"
-      },
+
     ];
 
     return Scaffold(
@@ -68,7 +49,7 @@ class driverHistory extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => driverReservationState(
+                        builder: (_) => DriverReservationDetail(
                           data: item["data"] ?? "",
                           valor: double.tryParse(
                                   item["preco"]!.replaceAll(RegExp(r'[^\d.]'), '')) ??

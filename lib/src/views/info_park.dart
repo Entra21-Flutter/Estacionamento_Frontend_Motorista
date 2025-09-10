@@ -1,15 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class infoPark extends StatelessWidget {
+class infoPark extends StatefulWidget {
   final Marker? estacionamento;
   final double precoPorMinuto;
+  static const double precoPorHora = 10.00;
 
   const infoPark({
     super.key,
     required this.estacionamento,
-    this.precoPorMinuto = 0.50, // valor exemplo
-  });
+    double? precoPorMinuto,
+  }) : precoPorMinuto = precoPorMinuto ?? precoPorHora / 60;
+
+  @override
+  State<infoPark> createState() => _InfoParkState();
+}
+
+class _InfoParkState extends State<infoPark> {
+  int vagasCobertas = 5; // valor fictício
+  int vagasDescobertas = 8; // valor fictício
+
+  void reservarVagaCoberta() {
+    setState(() {
+      if (vagasCobertas > 0) {
+        vagasCobertas--;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Vaga coberta reservada com sucesso!")),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Sem vagas cobertas disponíveis.")),
+        );
+      }
+    });
+  }
+
+  void reservarVagaDescoberta() {
+    setState(() {
+      if (vagasDescobertas > 0) {
+        vagasDescobertas--;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Vaga descoberta reservada com sucesso!")),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Sem vagas descobertas disponíveis.")),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +69,7 @@ class infoPark extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              estacionamento!.markerId.value,
+              widget.estacionamento?.markerId.value ?? "Estacionamento",
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
@@ -39,19 +78,24 @@ class infoPark extends StatelessWidget {
               children: [
                 _VagaInfo(
                   label: "Cobertas",
-                  quantidade: 5,
+                  quantidade: vagasCobertas,
                   icon: Icons.garage,
                 ),
                 _VagaInfo(
                   label: "Descobertas",
-                  quantidade: 8,
+                  quantidade: vagasDescobertas,
                   icon: Icons.local_parking,
                 ),
               ],
             ),
             const SizedBox(height: 16),
             Text(
-              'Preço por minuto: R\$ ${precoPorMinuto.toStringAsFixed(2)}',
+              'Preço hora: R\$ ${infoPark.precoPorHora.toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Preço por minuto: R\$ ${widget.precoPorMinuto.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 18),
             ),
             const Spacer(),
@@ -62,9 +106,7 @@ class infoPark extends StatelessWidget {
                 backgroundColor: Colors.blueAccent,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              onPressed: () {
-                // Lógica para reservar vaga coberta
-              },
+              onPressed: reservarVagaCoberta,
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
@@ -74,9 +116,7 @@ class infoPark extends StatelessWidget {
                 backgroundColor: Colors.green,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              onPressed: () {
-                // Lógica para reservar vaga descoberta
-              },
+              onPressed: reservarVagaDescoberta,
             ),
           ],
         ),

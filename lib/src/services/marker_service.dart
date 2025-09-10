@@ -60,7 +60,10 @@ class MarkerService {
           onTap: () => onTap(
           Marker(
             markerId: MarkerId(est["nome"]),
-          )))
+          )
+          
+          )
+          )
           );
         }
       }
