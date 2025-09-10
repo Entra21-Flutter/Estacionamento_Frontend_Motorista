@@ -20,7 +20,7 @@ class AppWidget extends StatelessWidget {
         '/login' : (context) => const DriverLogin(),
         '/cadastro' : (context) => const DriverRegister(),
         '/recuperar_senha' : (context) => const RecoverPassword(),
-        '/informacao_estacionamento' : (context) => InformacaoEstacionamento(estacionamento: null,),
+        '/informacao_estacionamento' : (context) => infoPark(estacionamento: null,),
         ...generateRoutes()
       },
 

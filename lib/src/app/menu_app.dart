@@ -21,7 +21,7 @@ final List<MenuModel> appMenuitens = [
     title: "Historico de pagamento", 
     icon: Icons.history_edu,
     route: "/history",
-    page: DriverHistory()
+    page: driverHistory()
     ),
     
 

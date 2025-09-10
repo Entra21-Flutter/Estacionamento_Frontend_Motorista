@@ -1,51 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class InformacaoEstacionamento extends StatefulWidget {
+class infoPark extends StatelessWidget {
   final Marker? estacionamento;
+  final double precoPorMinuto;
 
-  InformacaoEstacionamento({
+  const infoPark({
     super.key,
     required this.estacionamento,
+    this.precoPorMinuto = 0.50, // valor exemplo
   });
-
-  @override
-  State<InformacaoEstacionamento> createState() => _InformacaoEstacionamentoState();
-}
-
-class _InformacaoEstacionamentoState extends State<InformacaoEstacionamento> {
-  int vagasCobertas = 5; // valor fictício
-  int vagasDescobertas = 8; // valor fictício
-
-  void reservarVagaCoberta() {
-    setState(() {
-      if (vagasCobertas > 0) {
-        vagasCobertas--;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Vaga coberta reservada com sucesso!")),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Sem vagas cobertas disponíveis.")),
-        );
-      }
-    });
-  }
-
-  void reservarVagaDescoberta() {
-    setState(() {
-      if (vagasDescobertas > 0) {
-        vagasDescobertas--;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Vaga descoberta reservada com sucesso!")),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Sem vagas descobertas disponíveis.")),
-        );
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +30,7 @@ class _InformacaoEstacionamentoState extends State<InformacaoEstacionamento> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              widget.estacionamento!.markerId.value,
+              estacionamento!.markerId.value,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
@@ -75,15 +39,20 @@ class _InformacaoEstacionamentoState extends State<InformacaoEstacionamento> {
               children: [
                 _VagaInfo(
                   label: "Cobertas",
-                  quantidade: vagasCobertas,
+                  quantidade: 5,
                   icon: Icons.garage,
                 ),
                 _VagaInfo(
                   label: "Descobertas",
-                  quantidade: vagasDescobertas,
+                  quantidade: 8,
                   icon: Icons.local_parking,
                 ),
               ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Preço por minuto: R\$ ${precoPorMinuto.toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 18),
             ),
             const Spacer(),
             ElevatedButton.icon(
@@ -93,7 +62,9 @@ class _InformacaoEstacionamentoState extends State<InformacaoEstacionamento> {
                 backgroundColor: Colors.blueAccent,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              onPressed: reservarVagaCoberta,
+              onPressed: () {
+                // Lógica para reservar vaga coberta
+              },
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
@@ -103,7 +74,9 @@ class _InformacaoEstacionamentoState extends State<InformacaoEstacionamento> {
                 backgroundColor: Colors.green,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              onPressed: reservarVagaDescoberta,
+              onPressed: () {
+                // Lógica para reservar vaga descoberta
+              },
             ),
           ],
         ),
